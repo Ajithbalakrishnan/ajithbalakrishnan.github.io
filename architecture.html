@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Underwriting via Agentic RAG - Architecture</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--white);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .diagram-section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .diagram-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            background: var(--light-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            overflow-x: auto;
+        }
+
+        .description {
+            background: rgba(102, 126, 234, 0.05);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-top: 2rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .description h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .description ul {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .description li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--white);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .diagram-section {
+                padding: 1.5rem;
+            }
+
+            .mermaid {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+
+        <header>
+            <h1>Automated Underwriting Platform</h1>
+            <p>via Agentic RAG Architecture</p>
+        </header>
+
+        <div class="diagram-section">
+            <h2>System Architecture</h2>
+            <div class="mermaid">
+                graph TB
+                    subgraph UI["User Interface Layer"]
+                        WEB["Web Dashboard"]
+                        MOBILE["Mobile App"]
+                        ADMIN["Admin Portal"]
+                    end
+
+                    subgraph INPUT["Input Processing"]
+                        UPLOAD["Document Upload"]
+                        API["REST API"]
+                        BATCH["Batch Processing"]
+                    end
+
+                    subgraph ORCHESTRATION["Orchestration & CI/CD"]
+                        CICD["CI/CD Pipeline<br/>GitHub Actions"]
+                        ORCHESTRATOR["Workflow Orchestrator<br/>Airflow/Kubernetes"]
+                        LB["Load Balancer"]
+                    end
+
+                    subgraph AGENTS["Intelligent Agents"]
+                        DOCAGENT["Document<br/>Classification Agent"]
+                        EXTRACTAGENT["Information<br/>Extraction Agent"]
+                        VALIDAGENT["Validation<br/>Agent"]
+                        SCOREAGENT["Risk Scoring<br/>Agent"]
+                    end
+
+                    subgraph RAG["RAG Pipeline"]
+                        RETRIEVER["Vector Retriever<br/>Weaviate/Pinecone"]
+                        LLMQA["LLM Q&A<br/>Bedrock/Claude"]
+                        PROMPTS["Prompt<br/>Engineering"]
+                        CONTEXT["Context<br/>Enrichment"]
+                    end
+
+                    subgraph VLM["Vision-Language Models"]
+                        VLMMODEL["Fine-tuned VLM<br/>Document Understanding"]
+                        OCRDOC["Document Parser<br/>& OCR"]
+                        IMAGEPROC["Image Processing<br/>Pipeline"]
+                    end
+
+                    subgraph STORAGE["Data & Storage Layer"]
+                        POSTGRES["PostgreSQL<br/>Operational DB"]
+                        VECTORDB["Vector Database<br/>Document Embeddings"]
+                        S3["AWS S3<br/>Document Storage"]
+                        CACHE["Redis Cache<br/>Session/Results"]
+                    end
+
+                    subgraph INFERENCE["Compute & Inference"]
+                        ECS["AWS ECS Containers<br/>GPU Support"]
+                        BEDROCK["AWS Bedrock<br/>Managed LLM"]
+                        MLMODEL["ML Model Server<br/>TensorRT"]
+                    end
+
+                    subgraph MONITORING["Monitoring & Logging"]
+                        LOGS["CloudWatch Logs"]
+                        METRICS["Prometheus Metrics"]
+                        ALERTS["Alert System"]
+                    end
+
+                    subgraph OUTPUT["Output & Delivery"]
+                        DECISIONS["Underwriting Decisions"]
+                        REPORTS["Risk Reports"]
+                        NOTIFICATIONS["User Notifications"]
+                        HITL["Human-in-Loop Review"]
+                    end
+
+                    WEB --> LB
+                    MOBILE --> LB
+                    ADMIN --> LB
+                    UPLOAD --> API
+                    BATCH --> API
+                    API --> LB
+                    LB --> ORCHESTRATOR
+                    CICD --> ORCHESTRATOR
+                    ORCHESTRATOR --> DOCAGENT
+                    ORCHESTRATOR --> EXTRACTAGENT
+                    ORCHESTRATOR --> VALIDAGENT
+                    ORCHESTRATOR --> SCOREAGENT
+
+                    DOCAGENT --> VLM
+                    EXTRACTAGENT --> VLM
+                    EXTRACTAGENT --> RAG
+                    VALIDAGENT --> RAG
+                    SCOREAGENT --> RAG
+
+                    VLM --> VECTORDB
+                    RAG --> RETRIEVER
+                    RETRIEVER --> VECTORDB
+                    LLMQA --> BEDROCK
+                    PROMPTS --> LLMQA
+                    CONTEXT --> LLMQA
+
+                    VECTORDB --> POSTGRES
+                    BEDROCK --> POSTGRES
+                    S3 --> VECTORDB
+                    CACHE --> POSTGRES
+
+                    DOCAGENT --> ECS
+                    EXTRACTAGENT --> ECS
+                    VALIDAGENT --> ECS
+                    SCOREAGENT --> ECS
+                    ECS --> MLMODEL
+                    ECS --> BEDROCK
+
+                    DOCAGENT --> LOGS
+                    EXTRACTAGENT --> LOGS
+                    VALIDAGENT --> LOGS
+                    SCOREAGENT --> LOGS
+                    METRICS --> ALERTS
+
+                    VALIDAGENT --> DECISIONS
+                    SCOREAGENT --> DECISIONS
+                    DECISIONS --> REPORTS
+                    DECISIONS --> NOTIFICATIONS
+                    DECISIONS --> HITL
+                    HITL --> FEEDBACK["Feedback Loop<br/>for Retraining"]
+                    FEEDBACK --> AGENTS
+
+                    style UI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+                    style INPUT fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+                    style ORCHESTRATION fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+                    style AGENTS fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+                    style RAG fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+                    style VLM fill:#f1f8e9,stroke:#689f38,stroke-width:2px
+                    style STORAGE fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+                    style INFERENCE fill:#ede7f6,stroke:#512da8,stroke-width:2px
+                    style MONITORING fill:#fbe9e7,stroke:#d84315,stroke-width:2px
+                    style OUTPUT fill:#eceff1,stroke:#455a64,stroke-width:2px
+            </div>
+
+            <div class="description">
+                <h3>Architecture Overview</h3>
+                <p>This Agentic RAG-based underwriting platform leverages multiple intelligent agents working in concert to process mortgage applications with high accuracy and efficiency.</p>
+                <ul>
+                    <li><strong>User Interface Layer:</strong> Multi-platform access via web, mobile, and admin portals</li>
+                    <li><strong>Input Processing:</strong> Supports document uploads, API integrations, and batch processing</li>
+                    <li><strong>Orchestration:</strong> Kubernetes + Airflow for intelligent workflow management and CI/CD integration</li>
+                    <li><strong>Intelligent Agents:</strong> Specialized agents for document classification, information extraction, validation, and risk scoring</li>
+                    <li><strong>RAG Pipeline:</strong> Advanced retrieval-augmented generation using vector databases and LLMs for contextual understanding</li>
+                    <li><strong>Vision-Language Models:</strong> Fine-tuned models for document understanding and OCR with superior accuracy</li>
+                    <li><strong>Compute Infrastructure:</strong> AWS ECS with GPU support and Bedrock for scalable LLM inference</li>
+                    <li><strong>Data Layer:</strong> Combination of PostgreSQL, Vector DBs (Weaviate), S3, and Redis for optimal performance</li>
+                    <li><strong>Monitoring:</strong> Comprehensive observability with CloudWatch, Prometheus, and real-time alerts</li>
+                    <li><strong>Human-in-Loop:</strong> Feedback mechanism for continuous improvement and model retraining</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="diagram-section">
+            <h2>Agent Workflow</h2>
+            <div class="mermaid">
+                graph LR
+                    START["Document<br/>Received"] --> DC["Document<br/>Classification<br/>Agent"]
+                    DC --> DCH{Valid<br/>Document?}
+                    DCH -->|Yes| IE["Information<br/>Extraction<br/>Agent"]
+                    DCH -->|No| REJECT["Reject &<br/>Flag"]
+                    
+                    IE --> VLM["Vision-Language<br/>Model Processing"]
+                    VLM --> EMBED["Generate<br/>Embeddings"]
+                    EMBED --> RETRIEVE["Retrieve Similar<br/>Cases from<br/>Vector DB"]
+                    
+                    RETRIEVE --> VAL["Validation<br/>Agent"]
+                    VAL --> VALH{All Fields<br/>Valid?}
+                    VALH -->|No| CLEANSE["Data Cleansing<br/>& Retry"]
+                    CLEANSE --> VAL
+                    VALH -->|Yes| SCORE["Risk Scoring<br/>Agent"]
+                    
+                    SCORE --> LLM["LLM Analysis<br/>via RAG"]
+                    LLM --> CONTEXT["Context from<br/>Historical Data"]
+                    CONTEXT --> DECISION["Generate<br/>Underwriting<br/>Decision"]
+                    
+                    DECISION --> CONF{Confidence<br/>Score >94%?}
+                    CONF -->|Yes| AUTO["Auto-Approve"]
+                    CONF -->|No| HITL["Human Review<br/>in Loop"]
+                    
+                    AUTO --> REPORT["Generate<br/>Report"]
+                    HITL --> REPORT
+                    REJECT --> REPORT
+                    REPORT --> NOTIFY["Notify User"]
+                    NOTIFY --> END["End"]
+                    
+                    REPORT -.Feedback.-> FB["Feedback Loop<br/>for Model<br/>Improvement"]
+                    FB -.Updates.-> DC
+
+                    style START fill:#90caf9,stroke:#1976d2,stroke-width:2px
+                    style DC fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+                    style IE fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+                    style VAL fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+                    style SCORE fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+                    style VLM fill:#ffe0b2,stroke:#f57c00,stroke-width:2px
+                    style LLM fill:#f8bbd0,stroke:#c2185b,stroke-width:2px
+                    style AUTO fill:#a5d6a7,stroke:#2e7d32,stroke-width:2px
+                    style HITL fill:#ffccbc,stroke:#d84315,stroke-width:2px
+                    style REJECT fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+                    style END fill:#90caf9,stroke:#1976d2,stroke-width:2px
+            </div>
+
+            <div class="description">
+                <h3>Agent Processing Flow</h3>
+                <p>Each document flows through a series of specialized agents, with decision points and feedback loops:</p>
+                <ul>
+                    <li><strong>Document Classification:</strong> Identifies document type and route handling</li>
+                    <li><strong>Information Extraction:</strong> Uses VLM to extract key data fields</li>
+                    <li><strong>Validation Agent:</strong> Ensures data quality and completeness</li>
+                    <li><strong>Risk Scoring Agent:</strong> Computes risk metrics using historical context</li>
+                    <li><strong>LLM Analysis:</strong> RAG-based contextual analysis for decision making</li>
+                    <li><strong>Confidence Threshold:</strong> Auto-approve when confidence exceeds 94%</li>
+                    <li><strong>Human-in-Loop:</strong> Complex cases routed to underwriters for review</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="diagram-section">
+            <h2>Technology Stack</h2>
+            <div class="mermaid">
+                graph TB
+                    subgraph Frontend
+                        REACT["React/Vue.js"]
+                        MOBILE["React Native"]
+                    end
+
+                    subgraph Backend
+                        PYTHON["Python 3.11"]
+                        FASTAPI["FastAPI"]
+                        DJANGO["Django"]
+                    end
+
+                    subgraph AIFramework
+                        LANGGRAPH["LangGraph<br/>Agent Orchestration"]
+                        LANGCHAIN["LangChain<br/>RAG Framework"]
+                        AUTOGEN["AutoGen<br/>Multi-Agent"]
+                    end
+
+                    subgraph Models
+                        BEDROCK["AWS Bedrock<br/>Claude/LLaMA"]
+                        VLM["Vision-Language<br/>Model<br/>Fine-tuned"]
+                        OCR["Document OCR<br/>PaddleOCR"]
+                    end
+
+                    subgraph VectorDB
+                        WEAVIATE["Weaviate<br/>Vector DB"]
+                        EMBEDDINGS["Sentence<br/>Transformers"]
+                    end
+
+                    subgraph Infrastructure
+                        ECS["AWS ECS<br/>Container Orchestration"]
+                        KUBECTL["Kubernetes<br/>Pod Management"]
+                        DOCKER["Docker<br/>Containerization"]
+                    end
+
+                    subgraph CICD["DevOps & Monitoring"]
+                        GITHUB["GitHub<br/>Version Control"]
+                        ACTIONS["GitHub Actions<br/>CI/CD"]
+                        JENKINS["Jenkins<br/>Build Pipeline"]
+                    end
+
+                    REACT --> FASTAPI
+                    MOBILE --> FASTAPI
+                    FASTAPI --> LANGGRAPH
+                    DJANGO --> LANGGRAPH
+                    LANGGRAPH --> LANGCHAIN
+                    LANGCHAIN --> AUTOGEN
+                    LANGGRAPH --> BEDROCK
+                    LANGGRAPH --> VLM
+                    VLM --> OCR
+                    LANGCHAIN --> WEAVIATE
+                    EMBEDDINGS --> WEAVIATE
+                    FASTAPI --> ECS
+                    ECS --> DOCKER
+                    ECS --> KUBECTL
+                    GITHUB --> ACTIONS
+                    ACTIONS --> JENKINS
+
+                    style Frontend fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+                    style Backend fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+                    style AIFramework fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+                    style Models fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+                    style VectorDB fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+                    style Infrastructure fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+                    style CICD fill:#fbe9e7,stroke:#d84315,stroke-width:2px
+            </div>
+
+            <div class="description">
+                <h3>Technology Stack Details</h3>
+                <ul>
+                    <li><strong>Frontend:</strong> React/Vue.js for web, React Native for mobile</li>
+                    <li><strong>Backend:</strong> FastAPI for high-performance REST APIs, Django for admin</li>
+                    <li><strong>Agent Framework:</strong> LangGraph for agent orchestration, LangChain for RAG</li>
+                    <li><strong>AI Models:</strong> AWS Bedrock LLMs, Fine-tuned Vision-Language Models</li>
+                    <li><strong>Vector Database:</strong> Weaviate with Sentence Transformers embeddings</li>
+                    <li><strong>Infrastructure:</strong> AWS ECS with Kubernetes for container orchestration</li>
+                    <li><strong>DevOps:</strong> GitHub Actions + Jenkins for CI/CD pipelines</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Ajith Balakrishnan - AI/ML Engineer</p>
+            <p>Automated Underwriting Platform Architecture</p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        mermaid.contentLoaded();
+    </script>
+</body>
+</html>

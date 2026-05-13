@@ -570,6 +570,22 @@ section {
     color: var(--white);
 }
 
+.project-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+}
+
+.project-link:hover {
+    color: var(--white);
+    background: var(--primary-color);
+}
+
 /* ============ Publications Section ============ */
 .publications {
     background: var(--light-bg);
@@ -830,6 +846,129 @@ section {
     color: var(--accent-color);
 }
 
+/* ============ Metrics Section ============ */
+.metrics {
+    background: var(--white);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+    font-weight: 500;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.metrics-card {
+    background: linear-gradient(135deg, var(--light-bg) 0%, #f0f4ff 100%);
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.metrics-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.metrics-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.metrics-card:hover::before {
+    transform: scaleX(1);
+}
+
+.metrics-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.metrics-header i {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.metrics-header h3 {
+    color: var(--text-dark);
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.metric-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--white);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.metric-row:hover {
+    border-left-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+.metric-label {
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.metric-value {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.3rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.metric-note {
+    padding: 1rem;
+    background: rgba(102, 126, 234, 0.05);
+    border-left: 3px solid var(--primary-color);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
 /* ============ Responsive Design ============ */
 @media (max-width: 768px) {
     .hamburger {
@@ -906,6 +1045,10 @@ section {
 
     .projects-grid,
     .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .metrics-grid {
         grid-template-columns: 1fr;
     }
 
